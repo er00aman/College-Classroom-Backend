@@ -18,9 +18,10 @@ const multer = require('multer')
 router.post('/admin/seeder',seeder.seeder)
 router.post('/admin/login',adminController.Login)
 router.post('/admin/register',adminController.AdminRegister)
+router.post('/loginTeacher',teacher.loginTeacher)
 
 
-// router.use(require('../config/middlewere'))
+router.use(require('../config/middlewere'))
 
 // <<< === department api === >>>
 router.post('/department/add',department.departmentController)
@@ -64,10 +65,10 @@ router.post('/teacherRegisterDelete',teacherRegister.teacherRegisterDelete)
 
 
 router.post('/teacher',teacher.teacherController)
-router.post('/loginTeacher',teacher.loginTeacher)
 router.post('/teacherGetAll',teacher.getAll)
 router.post('/getSingle',teacher.getSingle)
 router.post('/teacherDelete',teacher.teacherDelete)
+router.post('/teacherBlock',teacher.teacherBlock)
 router.post('/teacherUpdate',teacher.teacherUpdate)
 
 

@@ -73,11 +73,12 @@ function getAll(req,res){
     subject.find(req.body)
     .populate('departmentId')
     .populate('courseId')
+    .populate('semesterId')
     .then(result1=>{
         res.json({
             success:true,
             status:200,
-            message:result1
+            data:result1
         })
     }).catch(err=>{
         res.json({
@@ -107,6 +108,7 @@ function getSingle(req,res){
         subject.findOne({_id:data._id})
         .populate('departmentId')
         .populate('courseId')
+        .populate('semesterId')
         .then(result2=>{
             if(!result2){
                 res.json({

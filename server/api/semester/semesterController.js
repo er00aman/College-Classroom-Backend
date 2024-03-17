@@ -1,4 +1,4 @@
-const { blockCourse } = require('../course/courseController')
+// const { blockCourse } = require('../course/courseController')
 const semester = require('./semesterModel')
 
 semesterController=(req,res)=>{

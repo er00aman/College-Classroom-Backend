@@ -20,8 +20,8 @@ function teacherController(req,res){
     if(!data.teacherDesignation)
     validation.push('Teacher designation')
 
-    if(!data.dataOfJoin)
-    validation.push('Teacher date of join')
+    // if(!data.dataOfJoin)
+    // validation.push('Teacher date of join')
 
     if(!data.workExperience)
     validation.push('Teacher work experience')
@@ -57,7 +57,7 @@ function teacherController(req,res){
                 dataObj.departmentId = data.departmentId
                 dataObj.courseId = data.courseId
                 dataObj.teacherDesignation = data.teacherDesignation
-                dataObj.dataOfJoin = data.dataOfJoin
+                // dataObj.dataOfJoin = data.dataOfJoin
                 dataObj.workExperience = data.workExperience
                 dataObj.teacherRegisterEmail = data.teacherRegisterEmail
                 dataObj.password = bcrypt.hashSync('data.password',salt)
@@ -164,7 +164,7 @@ function getAll(req,res){
         res.json({
             success:true,
             status:200,
-            message:result0
+            data:result0
         })
     }).catch(err=>{
         res.json({
@@ -257,9 +257,9 @@ function teacherUpdate(req,res){
                 if(data.teacherDesignation){
                     result2.teacherDesignation = data.teacherDesignation
                 }
-                if(data.dataOfJoin){
-                    result2.dataOfJoin = data.dataOfJoin
-                }
+                // if(data.dataOfJoin){
+                //     result2.dataOfJoin = data.dataOfJoin
+                // }
                 if(data.workExperience){
                     result2.workExperience = data.workExperience
                 }
@@ -340,12 +340,64 @@ function teacherDelete (req,res){
     }
 }
 
+const teacherBlock = (req,res)=>{
+    let data = req.body
+    validation = []
+
+    if(!data._id)
+    validation.push('Id')
+
+    if(!data.status)
+    validation.push('Status')
+
+    if(validation.length>0){
+        res.json({
+            success:false,
+            status:422,
+            message:validation.join(',')+' is/are required'
+        })
+    }else{
+        teacher.findOne({_id:data._id}).then(findData2=>{
+            if(!findData2){
+                res.json({
+                    success:false,
+                    status:404,
+                    message:'Not found!'
+                })
+            }else{
+                findData2.status = data.status
+                findData2.save().then(saveObj=>{
+                    res.json({
+                        success:true,
+                        status:200,
+                        message:'Teacher blocked successfully',
+                        data:saveObj
+                    })
+                }).catch(err=>{
+                    res.json({
+                        success:false,
+                        status:500,
+                        message:'Server error'+err
+                    })
+                })
+            }
+        }).catch(err=>{
+            res.json({
+                success:false,
+                status:400,
+                message:'Internal server error'+err
+            })
+        })
+    }
+}
+
 // <<< === teacher delete  end === >>
 module.exports = {
     teacherController,
     getAll,
     getSingle,
     teacherDelete,
+    teacherBlock,
     teacherUpdate,
     loginTeacher
 }
