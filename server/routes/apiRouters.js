@@ -19,6 +19,9 @@ router.post('/admin/seeder',seeder.seeder)
 router.post('/admin/login',adminController.Login)
 router.post('/admin/register',adminController.AdminRegister)
 router.post('/loginTeacher',teacher.loginTeacher)
+router.post('/teacherRegister',teacherRegister.teacherRegisterController)
+router.post('/studentLogin',student.studentLogin)
+router.post('/student',student.studentController)
 
 
 router.use(require('../config/middlewere'))
@@ -57,7 +60,6 @@ router.post('/semesterFilter',semester.filter)
 router.post('/semesterBlock',semester.semesterBlock)
 
 // <<< === teacher api === >>>
-router.post('/teacherRegister',teacherRegister.teacherRegisterController)
 router.post('/teacherRegisterGetAll',teacherRegister.getAll)
 router.post('/teacherRegisterGetSingle',teacherRegister.getSingle)
 router.post('/teacherRegisterUpdate',teacherRegister.teacherRegisterUpdate)
@@ -139,8 +141,6 @@ router.post('/studentAssignmentUpdate',studentAssignment.studentAssignmentUpdate
 router.post('/studentAssignmentDelete',studentAssignment.studentAssignmentDelete)
 
 // <<< === student api === >>>
-router.post('/studentLogin',student.studentLogin)
-router.post('/student',student.studentController)
 router.post('/getAll',student.getAll)
 router.post('/studentGetSingle',student.getSingle)
 router.post('/studentUpdate',student.studentUpdate)

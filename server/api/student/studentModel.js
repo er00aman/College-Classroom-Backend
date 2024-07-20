@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const studentSchema = mongoose.Schema({
     departmentId: {type:mongoose.Schema.Types.ObjectId,ref:'department',default:null},
     courseId: {type:mongoose.Schema.Types.ObjectId,ref:'course',default:null},
-    teacherId: {type:mongoose.Schema.Types.ObjectId,ref:'teacher',default:null},
+    // teacherId: {type:mongoose.Schema.Types.ObjectId,ref:'teacher',default:null},
     studentName: {type:String,default:null},
     studentEmail: {type:String,default:null},
     password: {type:String,default:null},

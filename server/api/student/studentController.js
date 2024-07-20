@@ -11,8 +11,8 @@ studentLogin = (req,res)=>{
     formData =  req.body
     validation = [ ]
     
-    if(!formData.studentEmail)
-    validation.push('Email')
+    if(!formData.universityRollNo)
+    validation.push('University roll no')
 
     if(!formData.password)
     validation.push('Password')
@@ -24,7 +24,7 @@ studentLogin = (req,res)=>{
             message:validation + ' is/are required'
         })
     }else{
-        student.findOne({studentEmail:formData.studentEmail})
+        student.findOne({universityRollNo:formData.universityRollNo})
         .then(resData=>{
             if(!resData){
                 res.json({
@@ -85,8 +85,8 @@ function studentController(req,res){
     if(!data.courseId)
     validation.push('Course Id')
 
-    if(!data.teacherId)
-    validation.push('Teacher Id')
+    // if(!data.teacherId)
+    // validation.push('Teacher Id')
 
     if(!data.studentName)
     validation.push('student name')
@@ -127,7 +127,7 @@ function studentController(req,res){
                 
                 dataObj.departmentId = data.departmentId
                 dataObj.courseId = data.courseId
-                dataObj.teacherId = data.teacherId
+                // dataObj.teacherId = data.teacherId
                 dataObj.studentName = data.studentName
                 dataObj.studentEmail = data.studentEmail
                 dataObj.universityRollNo = data.universityRollNo
@@ -166,7 +166,7 @@ function getAll(req,res){
     student.find(req.body)
     .populate('departmentId')
     .populate('courseId')
-    .populate('teacherId')
+    // .populate('teacherId')
     .populate('semesterId')
     .then(result=>{
         res.json({
@@ -202,7 +202,7 @@ function getSingle(req,res){
         student.findOne({_id:data._id})
         .populate('departmentId')
         .populate('courseId')
-        .populate('teacherId')
+        // .populate('teacherId')
         .populate('semesterId')
 
         .then(result1=>{
